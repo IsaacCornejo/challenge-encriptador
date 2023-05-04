@@ -162,6 +162,10 @@ main {
     margin-top: 3rem;
   }
 
+  .textarea-mensaje {
+    max-width: 80%;
+  }
+
   .botones {
     margin: 1rem;
     display: flex;
