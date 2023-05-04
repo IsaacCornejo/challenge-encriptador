@@ -12,7 +12,7 @@ html, body{
 
 
 body {
-  margin: 3rem 3rem 0 3rem;
+  margin: 1rem 3rem 0 3rem;
   background-color: #E5E5E5;
 }
 
@@ -101,6 +101,14 @@ main {
   max-width: 100%;
 }
 
+.footer{
+  max-width: 100%;
+  padding: 1rem;
+}
+
+.footer p {
+  text-align: center;
+}
 
 @media (max-width: 1250px) {
 
@@ -154,7 +162,11 @@ main {
   display: none;
 }
 
+
 }
+
+
+/* MEDIA QUERYS PARA DISEÑO RESPONSIVE */
 
 @media (max-width: 700px) {
 
