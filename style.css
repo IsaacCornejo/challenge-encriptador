@@ -20,6 +20,7 @@ body {
   box-sizing: border-box;
 }
 
+
 header {
   max-width: 100%;
 }
@@ -37,16 +38,18 @@ main {
 
 .botones {
   margin: 3rem 3rem 0 3rem;
- 
+  
 }
 
 .textarea-mensaje {
+  height: 60vh;
   background: none;
   border: none;
   outline: none;
   color: darkblue;
   font-size: 1.5rem;
   resize: none;
+  text-transform:lowercase;
 }
 
 .textarea-mensaje::placeholder {
@@ -200,4 +203,14 @@ main {
   margin: 3rem 1rem 3rem 1rem;
   }
 
+}
+
+.none {
+  display: none;
+}
+
+.color {
+  height: auto;
+  font-size: 1.5rem;
+  color: darkblue;
 }
