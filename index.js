@@ -54,19 +54,20 @@ encriptarTexto();
 function avisoMinusculas (){
 
   let texto = document.querySelector("textarea").value;
-
-
 //SENTENCIA PARA EJECUTAR UNA SOLA VEZ EL ALERT CUANDO SE DA CLICK EN EL TEXTAREA
   if (!ejecutado){
 
+
     if (texto === ""){
+          
+      swal("Aviso", "¡Recuerda que debes de utilizar solo letras minúsculas y sin acentos!", "success").then(() => {
+        textarea.focus(); // Enfocar nuevamente el textarea
+      });
       
-      alert("¡Recuerda que debes de utilizar solo letras minúsculas y sin acentos!");
       ejecutado = true;
+    }
   }
   
-  }
-
 }
 
 // INICIALIZANDO LA VARIABLE DEL TRIGGER QUE ME AYUDA A EJECUTAR EL ALERT EN EL TEXTAREA
