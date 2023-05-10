@@ -34,6 +34,7 @@ main {
 .input-mensaje {
   margin: 0 3rem 0 3rem;
   flex-grow: 1;
+  height: auto;
 }
 
 .botones {
@@ -113,6 +114,26 @@ main {
   text-align: center;
 }
 
+.boton-copiar {
+  width: 100%;
+  padding: 1rem;
+  background-color: transparent;
+  color: darkblue;
+  font-size: 1rem;
+  border-radius: 1rem;
+  border: 1px solid darkblue; 
+  cursor: pointer;
+  position: sticky;
+  top: 60vh;
+}
+
+.boton-copiar:active {
+  color: white;
+  background-color: darkblue;
+}
+
+/* MEDIA QUERYS PARA DISEÑO RESPONSIVE */
+
 @media (max-width: 1250px) {
 
   main {
@@ -169,7 +190,6 @@ main {
 }
 
 
-/* MEDIA QUERYS PARA DISEÑO RESPONSIVE */
 
 @media (max-width: 700px) {
 
