@@ -71,7 +71,14 @@ main {
   font-size: 1rem;
   border-radius: 1rem;
   cursor: pointer;
+  border: 1px solid darkblue;
 }
+
+.boton-encriptar:active {
+  color: darkblue;
+  background-color: lightgray;
+}
+
 
 .boton-desencriptar {
   margin-left: 2rem;
@@ -82,9 +89,15 @@ main {
   font-size: 1rem;
   border-radius: 1rem;
   border: 1px solid darkblue; 
-  cursor: pointer;
-  
+  cursor: pointer; 
 }
+
+.boton-desencriptar:active {
+  color: white;
+  background-color: darkblue;
+}
+
+
 
 .caja-mensaje {
   width: 20%;
@@ -131,6 +144,8 @@ main {
   color: white;
   background-color: darkblue;
 }
+
+
 
 /* MEDIA QUERYS PARA DISEÑO RESPONSIVE */
 
@@ -232,5 +247,5 @@ main {
 .color {
   height: auto;
   font-size: 1.5rem;
-  color: darkblue;
+  color: black;
 }
