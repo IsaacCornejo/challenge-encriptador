@@ -18,6 +18,15 @@ if (!ejecutado){
   
 }
 
+function limpiarCaja () {
+    
+  // ESTE CODIGO OCULTA LA IMAGEN Y EL TEXTO DE LA CAJA DE ENCRIPTACION
+document.getElementById("img-muñeco").classList.add("none");
+document.getElementById("h3-caja").classList.add("none");
+document.getElementById("p-caja").classList.add("none");
+}
+
+
 
 function encriptar (){
 
@@ -25,18 +34,9 @@ function encriptar (){
   // ESTE CODIGO OBTIENE EL TEXTO DEL TEXTAREA
   let texto = document.querySelector("textarea").value;
   texto = texto.toLocaleLowerCase();
-  let cuadroTextp = document.q
-  console.log (texto);
+  //console.log (texto);
 
   
-  function limpiarCaja () {
-    
-    // ESTE CODIGO OCULTA LA IMAGEN Y EL TEXTO DE LA CAJA DE ENCRIPTACION
-  document.getElementById("img-muñeco").classList.add("none");
-  document.getElementById("h3-caja").classList.add("none");
-  document.getElementById("p-caja").classList.add("none");
-
-  }
 
 
   function encriptarTexto (){
@@ -67,7 +67,7 @@ function encriptar (){
       // console.log(nuevoTexto);
     }
 
-    console.log(textoEncriptacion.join(''));
+   // console.log(textoEncriptacion.join(''));
     
     //TERMINO LOGICA DE ENCRIPTADO
 
@@ -87,6 +87,7 @@ function encriptar (){
 
 
     function aparecerBotonCopiar (){
+      
       let cajaEncriptador = document.getElementById("caja-mensaje");
       let botonCopiar = document.createElement("button");
       cajaEncriptador.appendChild(botonCopiar);
@@ -102,10 +103,11 @@ function encriptar (){
             swal('Error al copiar el texto: ', err);
           });
       });
-    
+  
     }
 
     aparecerBotonCopiar();
+
   }
 
  
@@ -116,20 +118,68 @@ function encriptar (){
 
 
 
-function copiarTexto (){
+function desencriptar () {
+  limpiarCaja();
 
-  let botonCopiar = document.getElementsByClassName("boton-copiar");
-  botonCopiar.addEventListener('click', function() {
-    navigator.clipboard.writeText(texto)
-      .then(() => {
-        console.log('El texto ha sido copiado al portapapeles');
-      })
-      .catch(err => {
-        console.error('Error al copiar el texto: ', err);
+  document.getElementById("caja-mensaje").classList.add("color");
+
+
+  function desencriptarTexto (){
+  
+    // ESTE CODIGO OBTIENE EL TEXTO DEL TEXTAREA
+    let textoEncriptado = document.querySelector("textarea").value;
+    textoEncriptado = textoEncriptado.toLocaleLowerCase();
+   // console.log (textoEncriptado);
+
+    let textoModificado = textoEncriptado.replace(/ai/g, "a").
+    replace(/enter/g, "e").
+    replace(/imes/g, "i").
+    replace(/ober/g, "o").
+    replace(/ufat/g, "u");
+
+   // console.log(textoModificado); 
+
+    let cajaEncriptador = document.getElementById("caja-mensaje");
+  
+    let nuevoParrafoDesencriptado = document.createElement("p");
+  
+    let textoDesencriptado = document.createTextNode(textoModificado);
+    
+    nuevoParrafoDesencriptado.appendChild(textoDesencriptado);
+    
+    cajaEncriptador.appendChild(nuevoParrafoDesencriptado);
+    
+    function aparecerBotonCopiar (){
+      
+      let cajaEncriptador = document.getElementById("caja-mensaje");
+      let botonCopiar = document.createElement("button");
+      cajaEncriptador.appendChild(botonCopiar);
+      botonCopiar.innerHTML = "Copiar";
+      botonCopiar.setAttribute("class", "boton-copiar");
+  
+      botonCopiar.addEventListener('click', function() {
+        navigator.clipboard.writeText(textoModificado)
+          .then(() => {
+            swal("El texto ha sido copiado al portapapeles", " ", "success");
+          })
+          .catch(err => {
+            swal('Error al copiar el texto: ', err);
+          });
       });
-  });
+  
+    }
+aparecerBotonCopiar();
+  }
+  desencriptarTexto();
+
+
+  document.querySelector(".boton-desencriptar").disabled = true;
 
 }
+
+
+
+
 
 // INICIALIZANDO LA VARIABLE DEL TRIGGER QUE ME AYUDA A EJECUTAR EL ALERT EN EL TEXTAREA
 let ejecutado = false;
@@ -137,6 +187,10 @@ let ejecutado = false;
 
 let botonEncriptador = document.querySelector(".boton-encriptar");
 botonEncriptador.onclick = encriptar;
+
+let botonDesencriptador = document.querySelector(".boton-desencriptar");
+botonDesencriptador.onclick = desencriptar;
+
 
 let textarea = document.querySelector(".textarea-mensaje");
 textarea.onclick = avisoMinusculas;
