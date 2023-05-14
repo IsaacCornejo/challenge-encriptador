@@ -1,61 +1,47 @@
-
-function avisoMinusculas (){
-
+function avisoMinusculas() {
   let texto = document.querySelector("textarea").value;
-//SENTENCIA PARA EJECUTAR UNA SOLA VEZ EL ALERT CUANDO SE DA CLICK EN EL TEXTAREA
-if (!ejecutado){
+  //SENTENCIA PARA EJECUTAR UNA SOLA VEZ EL ALERT CUANDO SE DA CLICK EN EL TEXTAREA
+  if (!ejecutado && texto === "") {
+    swal(
+      "Aviso",
+      "¡Recuerda que debes de utilizar solo letras minúsculas y sin acentos!",
+      "warning"
+    ).then(() => {
+      textarea.focus(); // Enfocar nuevamente el textarea
+    });
 
-  
-  if (texto === ""){
-          
-      swal("Aviso", "¡Recuerda que debes de utilizar solo letras minúsculas y sin acentos!", "warning").then(() => {
-        textarea.focus(); // Enfocar nuevamente el textarea
-      });
-      
-      ejecutado = true;
-    }
+    ejecutado = true;
   }
-  
 }
 
-function limpiarCaja () {
-    
+function limpiarCaja() {
   // ESTE CODIGO OCULTA LA IMAGEN Y EL TEXTO DE LA CAJA DE ENCRIPTACION
-document.getElementById("img-muñeco").classList.add("none");
-document.getElementById("h3-caja").classList.add("none");
-document.getElementById("p-caja").classList.add("none");
+  document.getElementById("img-muñeco").classList.add("none");
+  document.getElementById("h3-caja").classList.add("none");
+  document.getElementById("p-caja").classList.add("none");
 }
 
-
-
-function encriptar (){
-
-
+function encriptar() {
   // ESTE CODIGO OBTIENE EL TEXTO DEL TEXTAREA
   let texto = document.querySelector("textarea").value;
   texto = texto.toLocaleLowerCase();
   //console.log (texto);
 
-  
+  function encriptarTexto() {
+    // ESTE CODIGO SOLO ES PARA AGREGAR EL TEXTO PERO SIN ENCRIPTARLO
 
+    let cajaEncriptador = document.getElementById("caja-mensaje");
 
-  function encriptarTexto (){
-    
-  // ESTE CODIGO SOLO ES PARA AGREGAR EL TEXTO PERO SIN ENCRIPTARLO 
-    
-  let cajaEncriptador = document.getElementById("caja-mensaje");
-  
     let nuevoParrafoEncriptado = document.createElement("p");
 
     //LOGICA DE ENCRIPTADO
-    
-    
+
     let letrasDeEncriptacion = {
-      "a": "ai",
-      "e": "enter",
-      "i": "imes",
-      "o": "ober",
-      "u": "ufat"
+      a: "ai",
+      e: "enter",
+      i: "imes",
+      o: "ober",
+      u: "ufat",
     };
 
     let textoEncriptacion = [];
@@ -67,130 +53,113 @@ function encriptar (){
       // console.log(nuevoTexto);
     }
 
-   // console.log(textoEncriptacion.join(''));
-    
+    // console.log(textoEncriptacion.join(''));
+
     //TERMINO LOGICA DE ENCRIPTADO
 
     let textoEncriptado = document.createTextNode(textoEncriptacion.join(""));
 
     nuevoParrafoEncriptado.appendChild(textoEncriptado);
-    
+
     cajaEncriptador.appendChild(nuevoParrafoEncriptado);
-    
-    // AQUI ACABA EL CODIGO PARA AGREGAR EL TEXTO PERO SIN ENCRIPTARLO 
-    
-    
+
+    // AQUI ACABA EL CODIGO PARA AGREGAR EL TEXTO PERO SIN ENCRIPTARLO
+
     document.getElementById("caja-mensaje").classList.add("color");
-    
+
     // Deshabilitar el botón de encriptar
     document.querySelector(".boton-encriptar").disabled = true;
 
-
-    function aparecerBotonCopiar (){
-      
+    function aparecerBotonCopiar() {
       let cajaEncriptador = document.getElementById("caja-mensaje");
       let botonCopiar = document.createElement("button");
       cajaEncriptador.appendChild(botonCopiar);
       botonCopiar.innerHTML = "Copiar";
       botonCopiar.setAttribute("class", "boton-copiar");
-  
-      botonCopiar.addEventListener('click', function() {
-        navigator.clipboard.writeText(textoEncriptacion.join(""))
+
+      botonCopiar.addEventListener("click", function () {
+        navigator.clipboard
+          .writeText(textoEncriptacion.join(""))
           .then(() => {
             swal("El texto ha sido copiado al portapapeles", " ", "success");
           })
-          .catch(err => {
-            swal('Error al copiar el texto: ', err);
+          .catch((err) => {
+            swal("Error al copiar el texto: ", err);
           });
       });
-  
     }
 
     aparecerBotonCopiar();
-
   }
 
- 
-    // AQUI SE LLAMAN LAS FUNCIONES QUE SE EJECUTAN CON EL BOTON "ENCRIPTAR"
-    limpiarCaja();
-    encriptarTexto();
+  // AQUI SE LLAMAN LAS FUNCIONES QUE SE EJECUTAN CON EL BOTON "ENCRIPTAR"
+  limpiarCaja();
+  encriptarTexto();
 }
 
-
-
-function desencriptar () {
+function desencriptar() {
   limpiarCaja();
 
   document.getElementById("caja-mensaje").classList.add("color");
 
-
-  function desencriptarTexto (){
-  
+  function desencriptarTexto() {
     // ESTE CODIGO OBTIENE EL TEXTO DEL TEXTAREA
     let textoEncriptado = document.querySelector("textarea").value;
     textoEncriptado = textoEncriptado.toLocaleLowerCase();
-   // console.log (textoEncriptado);
+    // console.log (textoEncriptado);
 
-    let textoModificado = textoEncriptado.replace(/ai/g, "a").
-    replace(/enter/g, "e").
-    replace(/imes/g, "i").
-    replace(/ober/g, "o").
-    replace(/ufat/g, "u");
+    let textoModificado = textoEncriptado
+      .replace(/ai/g, "a")
+      .replace(/enter/g, "e")
+      .replace(/imes/g, "i")
+      .replace(/ober/g, "o")
+      .replace(/ufat/g, "u");
 
-   // console.log(textoModificado); 
+    // console.log(textoModificado);
 
     let cajaEncriptador = document.getElementById("caja-mensaje");
-  
+
     let nuevoParrafoDesencriptado = document.createElement("p");
-  
+
     let textoDesencriptado = document.createTextNode(textoModificado);
-    
+
     nuevoParrafoDesencriptado.appendChild(textoDesencriptado);
-    
+
     cajaEncriptador.appendChild(nuevoParrafoDesencriptado);
-    
-    function aparecerBotonCopiar (){
-      
+
+    function aparecerBotonCopiar() {
       let cajaEncriptador = document.getElementById("caja-mensaje");
       let botonCopiar = document.createElement("button");
       cajaEncriptador.appendChild(botonCopiar);
       botonCopiar.innerHTML = "Copiar";
       botonCopiar.setAttribute("class", "boton-copiar");
-  
-      botonCopiar.addEventListener('click', function() {
-        navigator.clipboard.writeText(textoModificado)
+
+      botonCopiar.addEventListener("click", function () {
+        navigator.clipboard
+          .writeText(textoModificado)
           .then(() => {
             swal("El texto ha sido copiado al portapapeles", " ", "success");
           })
-          .catch(err => {
-            swal('Error al copiar el texto: ', err);
+          .catch((err) => {
+            swal("Error al copiar el texto: ", err);
           });
       });
-  
     }
-aparecerBotonCopiar();
+    aparecerBotonCopiar();
   }
   desencriptarTexto();
 
-
   document.querySelector(".boton-desencriptar").disabled = true;
-
 }
-
-
-
-
 
 // INICIALIZANDO LA VARIABLE DEL TRIGGER QUE ME AYUDA A EJECUTAR EL ALERT EN EL TEXTAREA
 let ejecutado = false;
-
 
 let botonEncriptador = document.querySelector(".boton-encriptar");
 botonEncriptador.onclick = encriptar;
 
 let botonDesencriptador = document.querySelector(".boton-desencriptar");
 botonDesencriptador.onclick = desencriptar;
-
 
 let textarea = document.querySelector(".textarea-mensaje");
 textarea.onclick = avisoMinusculas;
