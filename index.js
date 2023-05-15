@@ -21,7 +21,30 @@ function limpiarCaja() {
   document.getElementById("p-caja").classList.add("none");
 }
 
+function avisoCajaVacia() {
+  let texto = document.querySelector("textarea");
+  let primerBoton = document.querySelector(
+    "#caja-mensaje button:first-of-type"
+  );
+
+  if (texto.value.trim() === "") {
+    swal("¡No has escrito aun nada!", " ", "warning").then(() => {
+      textarea.focus(); // Enfocar nuevamente el textarea
+
+      document.getElementById("img-muñeco").classList.add("display");
+      document.getElementById("h3-caja").classList.add("display");
+      document.getElementById("p-caja").classList.add("display");
+    });
+    primerBoton.remove();
+  } else if (texto.value.trim().length > 0) {
+    document.getElementById("img-muñeco").classList.remove("display");
+    document.getElementById("h3-caja").classList.remove("display");
+    document.getElementById("p-caja").classList.remove("display");
+  }
+}
+
 function encriptar() {
+  limpiarCaja();
   // ESTE CODIGO OBTIENE EL TEXTO DEL TEXTAREA
   let texto = document.querySelector("textarea").value;
   texto = texto.toLocaleLowerCase();
@@ -99,6 +122,7 @@ function encriptar() {
   // AQUI SE LLAMAN LAS FUNCIONES QUE SE EJECUTAN CON EL BOTON "ENCRIPTAR"
   limpiarCaja();
   encriptarTexto();
+  avisoCajaVacia();
 }
 
 function desencriptar() {

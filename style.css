@@ -249,3 +249,7 @@ main {
   font-size: 1.5rem;
   color: black;
 }
+
+.display {
+  display: block;
+}
