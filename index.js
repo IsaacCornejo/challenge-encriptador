@@ -32,8 +32,6 @@ function encriptar() {
 
     let cajaEncriptador = document.getElementById("caja-mensaje");
 
-    let nuevoParrafoEncriptado = document.createElement("p");
-
     //LOGICA DE ENCRIPTADO
 
     let letrasDeEncriptacion = {
@@ -57,22 +55,24 @@ function encriptar() {
 
     //TERMINO LOGICA DE ENCRIPTADO
 
-    let textoEncriptado = document.createTextNode(textoEncriptacion.join(""));
-
-    nuevoParrafoEncriptado.appendChild(textoEncriptado);
-
-    cajaEncriptador.appendChild(nuevoParrafoEncriptado);
+    let parrafoEncriptado = (document.getElementById(
+      "parrafo-encriptado"
+    ).innerHTML = textoEncriptacion.join(""));
 
     // AQUI ACABA EL CODIGO PARA AGREGAR EL TEXTO PERO SIN ENCRIPTARLO
 
     document.getElementById("caja-mensaje").classList.add("color");
 
     // Deshabilitar el botón de encriptar
-    document.querySelector(".boton-encriptar").disabled = true;
+    // document.querySelector(".boton-encriptar").disabled = true;
 
     function aparecerBotonCopiar() {
       let cajaEncriptador = document.getElementById("caja-mensaje");
+      let primerBoton = document.querySelector(
+        "#caja-mensaje button:first-of-type"
+      );
       let botonCopiar = document.createElement("button");
+
       cajaEncriptador.appendChild(botonCopiar);
       botonCopiar.innerHTML = "Copiar";
       botonCopiar.setAttribute("class", "boton-copiar");
@@ -87,6 +87,10 @@ function encriptar() {
             swal("Error al copiar el texto: ", err);
           });
       });
+
+      if (primerBoton) {
+        primerBoton.remove();
+      }
     }
 
     aparecerBotonCopiar();
@@ -120,16 +124,19 @@ function desencriptar() {
     let cajaEncriptador = document.getElementById("caja-mensaje");
 
     let nuevoParrafoDesencriptado = document.createElement("p");
+    nuevoParrafoDesencriptado.setAttribute("id", "parrafo-desencriptado");
 
-    let textoDesencriptado = document.createTextNode(textoModificado);
-
-    nuevoParrafoDesencriptado.appendChild(textoDesencriptado);
-
-    cajaEncriptador.appendChild(nuevoParrafoDesencriptado);
+    let ParrafoDesencriptado = (document.getElementById(
+      "parrafo-encriptado"
+    ).innerHTML = textoModificado);
 
     function aparecerBotonCopiar() {
       let cajaEncriptador = document.getElementById("caja-mensaje");
+      let primerBoton = document.querySelector(
+        "#caja-mensaje button:first-of-type"
+      );
       let botonCopiar = document.createElement("button");
+
       cajaEncriptador.appendChild(botonCopiar);
       botonCopiar.innerHTML = "Copiar";
       botonCopiar.setAttribute("class", "boton-copiar");
@@ -144,12 +151,16 @@ function desencriptar() {
             swal("Error al copiar el texto: ", err);
           });
       });
+
+      if (primerBoton) {
+        primerBoton.remove();
+      }
     }
     aparecerBotonCopiar();
   }
   desencriptarTexto();
 
-  document.querySelector(".boton-desencriptar").disabled = true;
+  // document.querySelector(".boton-desencriptar").disabled = true;
 }
 
 // INICIALIZANDO LA VARIABLE DEL TRIGGER QUE ME AYUDA A EJECUTAR EL ALERT EN EL TEXTAREA
